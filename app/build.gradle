@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    aaptOptions {
+        noCompress 'foo', 'bar'
+        ignoreAssetsPattern "!.svn:!.git:!.ds_store:!*.scc:.*:<dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    defaultConfig {
+        applicationId "com.example.vicky.myapplication"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    dexOptions {
+        jumboMode true //开启方法数65536限制检查,true为忽略
+        javaMaxHeapSize "8g"
+        preDexLibraries = false
+    }
+    lintOptions {
+        //lint 遇到 error 时继续 构建
+        abortOnError false
+        //build release 版本 时 不开启lint 检测
+        checkReleaseBuilds false
+        // 防止在发布的时候出现因MissingTranslation导致Build Failed!
+        disable 'MissingTranslation'
+        disable "InvalidPackage"
+        lintConfig file("lint.xml")
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false //混淆选项
+            multiDexEnabled true
+            debuggable false
+            zipAlignEnabled true
+            pseudoLocalesEnabled true
+            shrinkResources false
+            consumerProguardFiles 'proguard-library.txt'
+        }
+
+    }
+}
+
+dependencies {
+    implementation project(':library')
+}
