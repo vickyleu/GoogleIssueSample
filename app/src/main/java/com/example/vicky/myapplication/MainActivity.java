@@ -1,5 +1,6 @@
 package com.example.vicky.myapplication;
 
+import android.app.Activity;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             Class<Test> a = Test.class;
             RecyclerView recyclerView;
             int i = MIXED_CONTENT_COMPATIBILITY_MODE;
+
         }else {
 
         }
